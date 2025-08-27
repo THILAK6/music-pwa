@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>ESP32 MP3 Controller</title>
+  <title>My Own Music Player For My Girl</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="manifest" href="manifest.json">
   <meta name="theme-color" content="#000000">
@@ -13,8 +13,8 @@
   </style>
 </head>
 <body>
-  <h2>🎵 ESP32 MP3 Controller</h2>
-  
+  <h2>🎵 My Own Music Player For My Girl</h2>
+
   <!-- Connection -->
   <button onclick="connectBLE()">🔗 Connect</button>
   
@@ -68,7 +68,13 @@
     }
 
     if ("serviceWorker" in navigator) {
-      navigator.serviceWorker.register("service-worker.js");
+      window.addEventListener("load", () => {
+      const base = window.location.pathname;
+      navigator.serviceWorker
+        .register(base + "service-worker.js")
+        .then(reg => console.log("SW registered:", reg.scope))
+        .catch(err => console.error("SW failed:", err));
+    });
     }
   </script>
 </body>
